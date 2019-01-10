@@ -1,5 +1,6 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
+const jwt = require("jsonwebtoken");
 
 const User = require('../models/user');
 
@@ -52,7 +53,8 @@ router.post("/login", (req, res, next) => {
         { expiresIn: "1h" }
       );
       res.status(200).json({
-        token: token
+        token: token,
+        expiresIn:3600
       });
     })
     .catch(err => {
