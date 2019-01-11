@@ -19,6 +19,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 10];
   isUserAuthenticated = false;
+  userId: string;
   private postsSub: Subscription;
   private authStatusSubs: Subscription;
   constructor(
@@ -38,11 +39,13 @@ export class PostListComponent implements OnInit, OnDestroy {
       });
 
     this.isUserAuthenticated = this.authService.getIsAuth();
+    this.userId = this.authService.getUserId();
     this.authStatusSubs = this.authService
       .getAuthStatusListener()
       .subscribe(isAuthenticated => {
         console.log('Is User Authenticated = ' + isAuthenticated);
         this.isUserAuthenticated = isAuthenticated;
+        this.userId = this.authService.getUserId();
       });
   }
 
