@@ -10,12 +10,15 @@ const app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://jeet:f90mc28yz4W7Inrd@cluster0-0sus6.mongodb.net/node-angular?retryWrites=true")
+    "mongodb+srv://jeet:" +
+      process.env.MONGO_ATLAS_PW +
+      "@cluster0-0sus6.mongodb.net/node-angular?retryWrites=true"
+  )
   .then(() => {
     console.log("Connected to database");
   })
-  .catch((e) => {
-    console.log("Connection failed!",e);
+  .catch(e => {
+    console.log("Connection failed!", e);
   });
 
 //Here we are configuring express to use body-parser as middle-ware.
